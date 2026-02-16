@@ -74,13 +74,13 @@ const Index = () => {
             className={`absolute top-0 right-0 gap-2 text-gray-400 hover:text-blue-600 transition-opacity duration-300 ${shouldHideHeader ? 'opacity-0 pointer-events-none md:opacity-100 md:pointer-events-auto' : 'opacity-100'}`}
           >
             <Settings className="w-4 h-4" />
-            Admin
+            <span className="hidden md:inline">Admin</span>
           </Button>
           <div
             className="text-center transition-all duration-500 ease-in-out cursor-pointer group"
             onClick={handleReset}
           >
-            <h1 className={`font-extrabold tracking-tight text-gray-500 transition-all duration-500 group-hover:text-gray-700 ${shouldHideHeader ? 'text-xl md:text-4xl mb-0 md:mb-2' : 'text-4xl mb-2'}`}>
+            <h1 className={`font-extrabold tracking-tight text-gray-700 transition-all duration-500 ${shouldHideHeader ? 'text-xl md:text-4xl mb-0 md:mb-2' : 'text-4xl mb-2'}`}>
               Exchange Finder
             </h1>
             <p className={`text-gray-600 font-medium overflow-hidden transition-all duration-500 ${shouldHideHeader ? 'max-h-0 opacity-0' : 'max-h-20 opacity-100'}`}>

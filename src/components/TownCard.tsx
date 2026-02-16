@@ -20,7 +20,7 @@ interface TownCardProps {
 }
 
 const TownCard = ({ town: baseTown, onClose, onEdit }: TownCardProps) => {
-  const [showEmptyFields, setShowEmptyFields] = useState(true);
+  const [showEmptyFields, setShowEmptyFields] = useState(false);
 
   const { data: town, isLoading } = useQuery({
     queryKey: ['details', baseTown.id],
