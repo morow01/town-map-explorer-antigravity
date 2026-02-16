@@ -55,24 +55,28 @@ const Index = () => {
     );
   }
 
-  const isSearching = searchQuery.length > 0;
+  const shouldHideHeader = searchQuery.length > 0 || !!selectedTown || !!selectedCabinet;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 p-6 md:p-12">
       <div className="max-w-5xl mx-auto">
-        <header className={`flex flex-col items-center mb-12 relative transition-all duration-300 ${isSearching ? 'hidden md:flex' : 'flex'}`}>
+        <header className={`flex flex-col items-center relative transition-all duration-500 ease-in-out ${shouldHideHeader ? 'mb-4 md:mb-12 pt-0' : 'mb-12'}`}>
           <Button
             variant="ghost"
             size="sm"
             onClick={() => setIsAdmin(true)}
-            className="absolute top-0 right-0 gap-2 text-gray-400 hover:text-blue-600"
+            className={`absolute top-0 right-0 gap-2 text-gray-400 hover:text-blue-600 transition-opacity duration-300 ${shouldHideHeader ? 'opacity-0 pointer-events-none md:opacity-100 md:pointer-events-auto' : 'opacity-100'}`}
           >
             <Settings className="w-4 h-4" />
             Admin
           </Button>
-          <div className="text-center">
-            <h1 className="text-4xl font-extrabold tracking-tight text-gray-500 mb-2">Exchange Finder</h1>
-            <p className="text-gray-600 font-medium">Explore and manage network infrastructure with ease.</p>
+          <div className="text-center transition-all duration-500 ease-in-out">
+            <h1 className={`font-extrabold tracking-tight text-gray-500 transition-all duration-500 ${shouldHideHeader ? 'text-xl md:text-4xl mb-0 md:mb-2' : 'text-4xl mb-2'}`}>
+              Exchange Finder
+            </h1>
+            <p className={`text-gray-600 font-medium overflow-hidden transition-all duration-500 ${shouldHideHeader ? 'max-h-0 opacity-0' : 'max-h-20 opacity-100'}`}>
+              Explore and manage network infrastructure with ease.
+            </p>
           </div>
         </header>
 
@@ -112,7 +116,7 @@ const Index = () => {
                 />
               </div>
             ) : (
-              <div className={`text-center py-20 bg-white/50 backdrop-blur-sm rounded-3xl border border-dashed border-gray-300 ${isSearching ? 'hidden md:block' : 'block'}`}>
+              <div className={`text-center py-20 bg-white/50 backdrop-blur-sm rounded-3xl border border-dashed border-gray-300 ${shouldHideHeader ? 'hidden md:block' : 'block'}`}>
                 <div className="mx-auto w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-6">
                   <MapPin className="w-8 h-8 text-gray-400" />
                 </div>
@@ -138,7 +142,7 @@ const Index = () => {
                 />
               </div>
             ) : (
-              <div className={`text-center py-20 bg-white/50 backdrop-blur-sm rounded-3xl border border-dashed border-gray-300 ${isSearching ? 'hidden md:block' : 'block'}`}>
+              <div className={`text-center py-20 bg-white/50 backdrop-blur-sm rounded-3xl border border-dashed border-gray-300 ${shouldHideHeader ? 'hidden md:block' : 'block'}`}>
                 <div className="mx-auto w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-6">
                   <Server className="w-8 h-8 text-gray-400" />
                 </div>
