@@ -11,7 +11,7 @@ const TownMap = ({ latitude, longitude, name }: TownMapProps) => {
   const mapUrl = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
 
   return (
-    <div className="relative group w-full h-48 md:h-full min-h-[180px] bg-gray-200 rounded-xl overflow-hidden">
+    <div className="relative w-full h-48 md:h-full min-h-[180px] bg-gray-200 rounded-xl overflow-hidden">
       <iframe
         width="100%"
         height="100%"

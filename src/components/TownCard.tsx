@@ -74,7 +74,7 @@ const TownCard = ({ town: baseTown, onClose, onEdit }: TownCardProps) => {
   };
 
   return (
-    <div className="w-full mx-auto bg-white/90 backdrop-blur-md border border-gray-200 rounded-lg shadow-lg overflow-hidden animate-in fade-in zoom-in duration-300">
+    <div className="relative z-20 w-full mx-auto bg-white/90 backdrop-blur-md border border-gray-200 rounded-lg shadow-lg overflow-hidden">
       <div className="relative p-3 sm:p-6">
         <TownCardHeader
           townName={town.name}
