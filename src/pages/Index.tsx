@@ -80,7 +80,7 @@ const Index = () => {
             className="text-center transition-all duration-500 ease-in-out cursor-pointer group"
             onClick={handleReset}
           >
-            <h1 className={`font-extrabold tracking-tight text-gray-500 transition-all duration-500 group-hover:text-blue-600 ${shouldHideHeader ? 'text-xl md:text-4xl mb-0 md:mb-2' : 'text-4xl mb-2'}`}>
+            <h1 className={`font-extrabold tracking-tight text-gray-500 transition-all duration-500 group-hover:text-gray-700 ${shouldHideHeader ? 'text-xl md:text-4xl mb-0 md:mb-2' : 'text-4xl mb-2'}`}>
               Exchange Finder
             </h1>
             <p className={`text-gray-600 font-medium overflow-hidden transition-all duration-500 ${shouldHideHeader ? 'max-h-0 opacity-0' : 'max-h-20 opacity-100'}`}>
