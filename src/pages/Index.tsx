@@ -17,17 +17,20 @@ const Index = () => {
   const [editSiteId, setEditSiteId] = useState<number | undefined>();
 
   const [searchQuery, setSearchQuery] = useState("");
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
 
   const handleSelectTown = (town: any) => {
     setSelectedTown(town);
     setSelectedCabinet(null);
     setSearchQuery("");
+    setIsSearchFocused(false);
   };
 
   const handleSelectCabinet = (cabinet: any) => {
     setSelectedCabinet(cabinet);
     setSelectedTown(null);
     setSearchQuery("");
+    setIsSearchFocused(false);
   };
 
   const handleCloseTownCard = () => {
@@ -43,6 +46,13 @@ const Index = () => {
     setIsAdmin(true);
   };
 
+  const handleReset = () => {
+    setSearchQuery("");
+    setSelectedTown(null);
+    setSelectedCabinet(null);
+    setIsSearchFocused(false);
+  };
+
   if (isAdmin) {
     return (
       <AdminDashboard
@@ -55,13 +65,7 @@ const Index = () => {
     );
   }
 
-  const handleReset = () => {
-    setSearchQuery("");
-    setSelectedTown(null);
-    setSelectedCabinet(null);
-  };
-
-  const shouldHideHeader = searchQuery.length > 0 || !!selectedTown || !!selectedCabinet;
+  const shouldHideHeader = searchQuery.length > 0 || !!selectedTown || !!selectedCabinet || isSearchFocused;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 p-6 md:p-12">
@@ -97,6 +101,7 @@ const Index = () => {
             setSelectedTown(null);
             setSelectedCabinet(null);
             setSearchQuery("");
+            setIsSearchFocused(false);
           }}
           className="w-full"
         >
@@ -113,7 +118,11 @@ const Index = () => {
 
           <TabsContent value="towns" className="mt-2 outline-none">
             <div className="mb-10">
-              <TownSearch onSelectTown={handleSelectTown} onSearchQueryChange={setSearchQuery} />
+              <TownSearch
+                onSelectTown={handleSelectTown}
+                onSearchQueryChange={setSearchQuery}
+                onFocusChange={setIsSearchFocused}
+              />
             </div>
 
             {selectedTown ? (
@@ -139,7 +148,11 @@ const Index = () => {
 
           <TabsContent value="cabinets" className="mt-2 outline-none">
             <div className="mb-10">
-              <CabinetSearch onSelectCabinet={handleSelectCabinet} onSearchQueryChange={setSearchQuery} />
+              <CabinetSearch
+                onSelectCabinet={handleSelectCabinet}
+                onSearchQueryChange={setSearchQuery}
+                onFocusChange={setIsSearchFocused}
+              />
             </div>
 
             {selectedCabinet ? (

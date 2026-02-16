@@ -6,9 +6,10 @@ import { useQuery } from "@tanstack/react-query";
 interface TownSearchProps {
   onSelectTown: (town: any) => void;
   onSearchQueryChange?: (query: string) => void;
+  onFocusChange?: (isFocused: boolean) => void;
 }
 
-const TownSearch = ({ onSelectTown, onSearchQueryChange }: TownSearchProps) => {
+const TownSearch = ({ onSelectTown, onSearchQueryChange, onFocusChange }: TownSearchProps) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
@@ -29,6 +30,7 @@ const TownSearch = ({ onSelectTown, onSearchQueryChange }: TownSearchProps) => {
     const handleClickOutside = (event: MouseEvent) => {
       if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
         setIsFocused(false);
+        onFocusChange?.(false);
       }
     };
 
@@ -36,7 +38,7 @@ const TownSearch = ({ onSelectTown, onSearchQueryChange }: TownSearchProps) => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [onFocusChange]);
 
   return (
     <div ref={searchRef} className="relative w-full max-w-md mx-auto">
@@ -58,7 +60,10 @@ const TownSearch = ({ onSelectTown, onSearchQueryChange }: TownSearchProps) => {
             setSearchQuery(val);
             onSearchQueryChange?.(val);
           }}
-          onFocus={() => setIsFocused(true)}
+          onFocus={() => {
+            setIsFocused(true);
+            onFocusChange?.(true);
+          }}
         />
       </div>
 
@@ -74,6 +79,7 @@ const TownSearch = ({ onSelectTown, onSearchQueryChange }: TownSearchProps) => {
                   setSearchQuery("");
                   onSearchQueryChange?.("");
                   setIsFocused(false);
+                  onFocusChange?.(false);
                 }}
               >
                 <div className="flex items-center justify-between">
