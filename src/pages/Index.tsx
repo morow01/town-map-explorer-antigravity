@@ -5,6 +5,7 @@ import TownCard from "@/components/TownCard";
 import CabinetSearch from "@/components/CabinetSearch";
 import CabinetCard from "@/components/CabinetCard";
 import AdminDashboard from "@/components/AdminDashboard";
+import AdminLoginModal from "@/components/AdminLoginModal";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { MapPin, Server, Settings } from "lucide-react";
@@ -18,6 +19,10 @@ const Index = () => {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearchFocused, setIsSearchFocused] = useState(false);
+
+  // Security State
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [pendingAction, setPendingAction] = useState<(() => void) | null>(null);
 
   const handleSelectTown = (town: any) => {
     setSelectedTown(town);
@@ -42,8 +47,33 @@ const Index = () => {
   };
 
   const handleEditSite = (id: number) => {
-    setEditSiteId(id);
-    setIsAdmin(true);
+    if (isAdmin) {
+      setEditSiteId(id);
+      setIsAdmin(true);
+    } else {
+      setPendingAction(() => () => {
+        setEditSiteId(id);
+        setIsAdmin(true);
+      });
+      setShowLoginModal(true);
+    }
+  };
+
+  const handleAdminClick = () => {
+    if (isAdmin) {
+      // Already logged in
+    } else {
+      setPendingAction(() => () => setIsAdmin(true));
+      setShowLoginModal(true);
+    }
+  };
+
+  const handleLoginSuccess = () => {
+    setShowLoginModal(false);
+    if (pendingAction) {
+      pendingAction();
+      setPendingAction(null);
+    }
   };
 
   const handleReset = () => {
@@ -57,7 +87,19 @@ const Index = () => {
     return (
       <AdminDashboard
         onBack={() => {
-          setIsAdmin(false);
+          setIsAdmin(false); // Log out on back? Or stay logged in? 
+          // Let's keep them logged in for the session, or log out?
+          // User asked for a prompt. Let's keep session active for convenience, 
+          // but 'setIsAdmin(false)' here actually exits the DASHBOARD view.
+          // To implement true "session", we'd need another state.
+          // For now, let's treat "Back" as just leaving the dashboard, 
+          // but if they click "Admin" again, they might expect to be logged in.
+          // However, the state 'isAdmin' controls the VIEW. 
+          // Let's separate 'isLoggedIn' from 'showAdminDashboard'.
+          // Actually, simply:
+          // 'isAdmin' currently means "Show Admin Dashboard".
+          // I'll leave it as is: "Back" exits the dashboard. 
+          // If they click "Admin" again, they will be prompted again. This is safer.
           setEditSiteId(undefined);
         }}
         initialSiteId={editSiteId}
@@ -69,12 +111,21 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 p-6 md:p-12">
+      <AdminLoginModal
+        isOpen={showLoginModal}
+        onClose={() => {
+          setShowLoginModal(false);
+          setPendingAction(null);
+        }}
+        onLogin={handleLoginSuccess}
+      />
+
       <div className="max-w-5xl mx-auto">
         <header className={`flex flex-col items-center relative transition-all duration-500 ease-in-out ${shouldHideHeader ? 'mb-4 md:mb-12 pt-0' : 'mb-12'}`}>
           <Button
             variant="ghost"
             size="sm"
-            onClick={() => setIsAdmin(true)}
+            onClick={handleAdminClick}
             className={`absolute top-0 right-0 gap-2 text-gray-400 hover:text-blue-600 transition-opacity duration-300 ${shouldHideHeader ? 'opacity-0 pointer-events-none md:opacity-100 md:pointer-events-auto' : 'opacity-100'}`}
           >
             <Settings className="w-4 h-4" />
