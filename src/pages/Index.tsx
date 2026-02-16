@@ -65,7 +65,7 @@ const Index = () => {
             Admin
           </Button>
           <div className="text-center">
-            <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 mb-2">Exchange Finder</h1>
+            <h1 className="text-4xl font-extrabold tracking-tight text-gray-500 mb-2">Exchange Finder</h1>
             <p className="text-gray-600 font-medium">Explore and manage network infrastructure with ease.</p>
           </div>
         </header>
