@@ -116,7 +116,7 @@ const Index = () => {
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="towns" className="mt-2 outline-none">
+          <TabsContent value="towns" className="mt-2 outline-none overflow-visible">
             <div className="mb-10">
               <TownSearch
                 onSelectTown={handleSelectTown}

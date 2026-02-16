@@ -18,7 +18,7 @@ const TownMap = ({ latitude, longitude, name }: TownMapProps) => {
   }, []);
 
   return (
-    <div className="relative w-full h-48 md:h-full min-h-[180px] bg-gray-200 rounded-xl overflow-hidden">
+    <div className="relative z-50 w-full h-48 md:h-full min-h-[180px] bg-gray-200 rounded-xl overflow-hidden isolate transform-gpu">
       {!isReady && (
         <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
           <div className="w-6 h-6 border-2 border-gray-300 border-t-blue-500 rounded-full animate-spin" />
@@ -34,7 +34,7 @@ const TownMap = ({ latitude, longitude, name }: TownMapProps) => {
           marginWidth={0}
           src={`https://maps.google.com/maps?q=${latitude},${longitude}&hl=en&z=17&output=embed`}
           title={`Map of ${name}`}
-          className="w-full h-full pointer-events-auto"
+          className="w-full h-full pointer-events-auto border-0"
         ></iframe>
       )}
 
