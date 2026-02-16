@@ -93,6 +93,14 @@ const Index = () => {
     setIsSearchFocused(false);
   };
 
+  const handleSearchQueryChange = (query: string) => {
+    setSearchQuery(query);
+    if (query.length > 0) {
+      setSelectedTown(null);
+      setSelectedCabinet(null);
+    }
+  };
+
   if (isAdmin) {
     return (
       <AdminDashboard
@@ -181,7 +189,7 @@ const Index = () => {
             <div className="mb-10">
               <TownSearch
                 onSelectTown={handleSelectTown}
-                onSearchQueryChange={setSearchQuery}
+                onSearchQueryChange={handleSearchQueryChange}
                 onFocusChange={setIsSearchFocused}
               />
             </div>
@@ -211,7 +219,7 @@ const Index = () => {
             <div className="mb-10">
               <CabinetSearch
                 onSelectCabinet={handleSelectCabinet}
-                onSearchQueryChange={setSearchQuery}
+                onSearchQueryChange={handleSearchQueryChange}
                 onFocusChange={setIsSearchFocused}
               />
             </div>
