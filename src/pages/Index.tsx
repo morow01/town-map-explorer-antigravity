@@ -88,7 +88,7 @@ const Index = () => {
               Exchange Finder
             </h1>
             <p className={`text-gray-600 font-medium overflow-hidden transition-all duration-500 ${shouldHideHeader ? 'max-h-0 opacity-0' : 'max-h-20 opacity-100'}`}>
-              Explore and manage network infrastructure with ease.
+              Find the exchange or cabinet with ease
             </p>
           </div>
         </header>
