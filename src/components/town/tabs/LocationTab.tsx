@@ -82,7 +82,7 @@ export function LocationTab({ town, latitude, longitude, photoGalleryUrl, should
           )}
         </div>
 
-        <div className="min-h-[250px] md:min-h-full">
+        <div className="h-[300px] md:h-full md:min-h-[500px]">
           <TownMap latitude={latitude} longitude={longitude} name={town.name} />
         </div>
       </div>
