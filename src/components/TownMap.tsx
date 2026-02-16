@@ -8,19 +8,19 @@ interface TownMapProps {
 }
 
 const TownMap = ({ latitude, longitude, name }: TownMapProps) => {
-  const openGoogleMaps = () => {
-    const url = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
-    window.open(url, "_blank");
-  };
-
   return (
-    <button
-      onClick={openGoogleMaps}
-      className="group w-full flex items-center justify-center gap-2 bg-gray-50 hover:bg-gray-100 text-gray-700 py-2 px-4 rounded-lg border border-gray-200 transition-all duration-200"
-    >
-      <MapPin className="w-4 h-4 text-gray-500 group-hover:text-gray-700 transition-colors duration-200" />
-      <span className="text-sm font-medium">View on Google Maps</span>
-    </button>
+    <div className="bg-gray-200 rounded-xl overflow-hidden h-48 md:h-full min-h-[180px] w-full">
+      <iframe
+        width="100%"
+        height="100%"
+        frameBorder="0"
+        scrolling="no"
+        marginHeight={0}
+        marginWidth={0}
+        src={`https://maps.google.com/maps?q=${latitude},${longitude}&hl=en&z=17&output=embed`}
+        title={`Map of ${name}`}
+      ></iframe>
+    </div>
   );
 };
 
