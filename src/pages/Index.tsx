@@ -21,6 +21,14 @@ const Index = () => {
   const [isSearchFocused, setIsSearchFocused] = useState(false);
 
   // Security State
+  // Check localStorage on initial load to see if user is already logged in
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("town_map_admin_auth") === "true";
+    }
+    return false;
+  });
+
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [pendingAction, setPendingAction] = useState<(() => void) | null>(null);
 
