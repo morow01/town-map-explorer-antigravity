@@ -5,9 +5,10 @@ import { useQuery } from "@tanstack/react-query";
 
 interface CabinetSearchProps {
   onSelectCabinet: (cabinet: any) => void;
+  onSearchQueryChange?: (query: string) => void;
 }
 
-const CabinetSearch = ({ onSelectCabinet }: CabinetSearchProps) => {
+const CabinetSearch = ({ onSelectCabinet, onSearchQueryChange }: CabinetSearchProps) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
@@ -52,7 +53,11 @@ const CabinetSearch = ({ onSelectCabinet }: CabinetSearchProps) => {
           className="w-full pl-10 pr-4 py-3 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-200 transition-all duration-200"
           placeholder="Search for a cabinet MDF, CCP_NO, or IPID..."
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          onChange={(e) => {
+            const val = e.target.value;
+            setSearchQuery(val);
+            onSearchQueryChange?.(val);
+          }}
           onFocus={() => setIsFocused(true)}
         />
       </div>
@@ -67,6 +72,7 @@ const CabinetSearch = ({ onSelectCabinet }: CabinetSearchProps) => {
                 onClick={() => {
                   onSelectCabinet(cabinet);
                   setSearchQuery("");
+                  onSearchQueryChange?.("");
                   setIsFocused(false);
                 }}
               >

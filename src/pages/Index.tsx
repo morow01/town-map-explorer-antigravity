@@ -16,14 +16,18 @@ const Index = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [editSiteId, setEditSiteId] = useState<number | undefined>();
 
+  const [searchQuery, setSearchQuery] = useState("");
+
   const handleSelectTown = (town: any) => {
     setSelectedTown(town);
     setSelectedCabinet(null);
+    setSearchQuery("");
   };
 
   const handleSelectCabinet = (cabinet: any) => {
     setSelectedCabinet(cabinet);
     setSelectedTown(null);
+    setSearchQuery("");
   };
 
   const handleCloseTownCard = () => {
@@ -51,10 +55,12 @@ const Index = () => {
     );
   }
 
+  const isSearching = searchQuery.length > 0;
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 p-6 md:p-12">
       <div className="max-w-5xl mx-auto">
-        <header className="flex flex-col items-center mb-12 relative">
+        <header className={`flex flex-col items-center mb-12 relative transition-all duration-300 ${isSearching ? 'hidden md:flex' : 'flex'}`}>
           <Button
             variant="ghost"
             size="sm"
@@ -77,6 +83,7 @@ const Index = () => {
             setActiveTab(value);
             setSelectedTown(null);
             setSelectedCabinet(null);
+            setSearchQuery("");
           }}
           className="w-full"
         >
@@ -93,7 +100,7 @@ const Index = () => {
 
           <TabsContent value="towns" className="mt-2 outline-none">
             <div className="mb-10">
-              <TownSearch onSelectTown={handleSelectTown} />
+              <TownSearch onSelectTown={handleSelectTown} onSearchQueryChange={setSearchQuery} />
             </div>
 
             {selectedTown ? (
@@ -105,7 +112,7 @@ const Index = () => {
                 />
               </div>
             ) : (
-              <div className="text-center py-20 bg-white/50 backdrop-blur-sm rounded-3xl border border-dashed border-gray-300">
+              <div className={`text-center py-20 bg-white/50 backdrop-blur-sm rounded-3xl border border-dashed border-gray-300 ${isSearching ? 'hidden md:block' : 'block'}`}>
                 <div className="mx-auto w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-6">
                   <MapPin className="w-8 h-8 text-gray-400" />
                 </div>
@@ -119,7 +126,7 @@ const Index = () => {
 
           <TabsContent value="cabinets" className="mt-2 outline-none">
             <div className="mb-10">
-              <CabinetSearch onSelectCabinet={handleSelectCabinet} />
+              <CabinetSearch onSelectCabinet={handleSelectCabinet} onSearchQueryChange={setSearchQuery} />
             </div>
 
             {selectedCabinet ? (
@@ -131,7 +138,7 @@ const Index = () => {
                 />
               </div>
             ) : (
-              <div className="text-center py-20 bg-white/50 backdrop-blur-sm rounded-3xl border border-dashed border-gray-300">
+              <div className={`text-center py-20 bg-white/50 backdrop-blur-sm rounded-3xl border border-dashed border-gray-300 ${isSearching ? 'hidden md:block' : 'block'}`}>
                 <div className="mx-auto w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-6">
                   <Server className="w-8 h-8 text-gray-400" />
                 </div>

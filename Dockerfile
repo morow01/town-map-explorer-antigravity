@@ -15,8 +15,12 @@ COPY server/ ./server/
 COPY dist/ ./dist/
 
 # Persistence
+# Ensure data directory exists inside the image
+RUN mkdir -p /app/server/data
+
 VOLUME ["/app/server/data"]
 
 EXPOSE 3001
 
+# The CMD should be run from the root workdir
 CMD ["node", "server/index.js"]
