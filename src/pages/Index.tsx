@@ -174,14 +174,20 @@ const Index = () => {
           }}
           className="w-full"
         >
-          <TabsList className="grid w-full grid-cols-2 mb-8 bg-white/50 backdrop-blur-md p-1 rounded-xl border border-gray-200 shadow-sm">
-            <TabsTrigger value="towns" className="flex items-center gap-2 py-3 rounded-lg transition-all">
+          <TabsList className="grid w-full grid-cols-2 mb-8 bg-gray-100 p-1.5 rounded-full border border-gray-200 shadow-inner">
+            <TabsTrigger
+              value="towns"
+              className="flex items-center justify-center gap-2 py-3 rounded-full transition-all duration-300 data-[state=active]:bg-slate-900 data-[state=active]:text-white data-[state=active]:shadow-lg"
+            >
               <MapPin className="w-5 h-5" />
-              <span className="font-semibold">Exchanges</span>
+              <span className="font-bold tracking-wide">Exchanges</span>
             </TabsTrigger>
-            <TabsTrigger value="cabinets" className="flex items-center gap-2 py-3 rounded-lg transition-all">
+            <TabsTrigger
+              value="cabinets"
+              className="flex items-center justify-center gap-2 py-3 rounded-full transition-all duration-300 data-[state=active]:bg-slate-900 data-[state=active]:text-white data-[state=active]:shadow-lg"
+            >
               <Server className="w-5 h-5" />
-              <span className="font-semibold">Cabinets</span>
+              <span className="font-bold tracking-wide">Cabinets</span>
             </TabsTrigger>
           </TabsList>
 
