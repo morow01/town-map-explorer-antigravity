@@ -24,19 +24,6 @@ const TownMap = ({ latitude, longitude, name }: TownMapProps) => {
         className="w-full h-full"
       ></iframe>
 
-      {/* Overlay for better mobile interaction and "View Larger" option */}
-      <a
-        href={mapUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
-      >
-        <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg text-sm font-medium text-gray-700 flex items-center gap-2 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-          <MapPin className="w-4 h-4 text-blue-600" />
-          View larger map
-        </div>
-      </a>
-
       {/* Mobile-only external link hint (always visible on very small screens if desired, or relying on the tap behavior which triggers hover on mobile) */}
       <a
         href={mapUrl}
