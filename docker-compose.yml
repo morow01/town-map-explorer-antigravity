@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  exchanges-explorer:
+    build: .
+    container_name: exchanges-explorer
+    restart: always
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./data:/app/server/data
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
