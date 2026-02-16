@@ -55,6 +55,12 @@ const Index = () => {
     );
   }
 
+  const handleReset = () => {
+    setSearchQuery("");
+    setSelectedTown(null);
+    setSelectedCabinet(null);
+  };
+
   const shouldHideHeader = searchQuery.length > 0 || !!selectedTown || !!selectedCabinet;
 
   return (
@@ -70,8 +76,11 @@ const Index = () => {
             <Settings className="w-4 h-4" />
             Admin
           </Button>
-          <div className="text-center transition-all duration-500 ease-in-out">
-            <h1 className={`font-extrabold tracking-tight text-gray-500 transition-all duration-500 ${shouldHideHeader ? 'text-xl md:text-4xl mb-0 md:mb-2' : 'text-4xl mb-2'}`}>
+          <div
+            className="text-center transition-all duration-500 ease-in-out cursor-pointer group"
+            onClick={handleReset}
+          >
+            <h1 className={`font-extrabold tracking-tight text-gray-500 transition-all duration-500 group-hover:text-blue-600 ${shouldHideHeader ? 'text-xl md:text-4xl mb-0 md:mb-2' : 'text-4xl mb-2'}`}>
               Exchange Finder
             </h1>
             <p className={`text-gray-600 font-medium overflow-hidden transition-all duration-500 ${shouldHideHeader ? 'max-h-0 opacity-0' : 'max-h-20 opacity-100'}`}>
