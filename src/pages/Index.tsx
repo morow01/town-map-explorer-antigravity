@@ -55,7 +55,7 @@ const Index = () => {
   };
 
   const handleEditSite = (id: number) => {
-    if (isAdmin) {
+    if (isAuthenticated) {
       setEditSiteId(id);
       setIsAdmin(true);
     } else {
@@ -68,8 +68,8 @@ const Index = () => {
   };
 
   const handleAdminClick = () => {
-    if (isAdmin) {
-      // Already logged in
+    if (isAuthenticated) {
+      setIsAdmin(true);
     } else {
       setPendingAction(() => () => setIsAdmin(true));
       setShowLoginModal(true);
@@ -78,6 +78,8 @@ const Index = () => {
 
   const handleLoginSuccess = () => {
     setShowLoginModal(false);
+    setIsAuthenticated(true);
+    localStorage.setItem("town_map_admin_auth", "true");
     if (pendingAction) {
       pendingAction();
       setPendingAction(null);
