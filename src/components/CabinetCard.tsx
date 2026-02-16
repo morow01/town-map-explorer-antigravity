@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Loader2, X, Server, MapPin, Info, Edit2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import TownMap from "./TownMap";
 
 interface CabinetCardProps {
   cabinet: any; // Input cabinet from search results
@@ -104,16 +105,8 @@ const CabinetCard = ({ cabinet: baseCabinet, onClose, onEdit }: CabinetCardProps
             </div>
           </div>
 
-          <div className="bg-gray-200 rounded-xl overflow-hidden h-48 md:h-full min-h-[180px]">
-            <iframe
-              width="100%"
-              height="100%"
-              frameBorder="0"
-              scrolling="no"
-              marginHeight={0}
-              marginWidth={0}
-              src={`https://maps.google.com/maps?q=${lat},${lng}&hl=en&z=17&output=embed`}
-            ></iframe>
+          <div className="h-48 md:h-full min-h-[180px]">
+            <TownMap latitude={lat} longitude={lng} name={`${cabinet.mdf} Cabinet`} />
           </div>
         </div>
       </div>
