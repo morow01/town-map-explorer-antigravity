@@ -21,7 +21,7 @@ const TownMap = ({ latitude, longitude, name }: TownMapProps) => {
         marginWidth={0}
         src={`https://maps.google.com/maps?q=${latitude},${longitude}&hl=en&z=17&output=embed`}
         title={`Map of ${name}`}
-        className="w-full h-full"
+        className="w-full h-full pointer-events-auto"
       ></iframe>
 
       {/* Mobile-only external link hint (always visible on very small screens if desired, or relying on the tap behavior which triggers hover on mobile) */}
